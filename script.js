@@ -1,55 +1,85 @@
- let button1=document.getElementById("btn1");
-        let button2=document.getElementById("btn2");
-        let paras=document.querySelector(".copy");
+let butn=document.getElementById('btn');
+let insert = document.getElementById('input');
+let lst=document.querySelector(".list");
 
-            var c1="#ffff"
-            var c2="#0000"
-           const color = ()=>{
-           let num="0123456789ABCDEF";
-           let numb="#";
-           for(let i=0;i<6;i++){
-             numb+= num [Math.floor(Math.random()*16)];
-           }
-           return numb;
-        };
 
-        const parag=(color)=>{
-            color=color.replace("#","");
-            let r=parseInt(color.slice(0,2),16);
-            let g=parseInt(color.slice(2,4),16);
-            let b=parseInt(color.slice(4,6),16);
-            return `rgb(${r},${g},${b})`;
-        }
+const getodo=()=>{
+    return JSON.parse(localStorage.getItem('todoitem'));
+}
 
-        const methodrandom=()=>{
-            const color1=color();
-            button1.textContent=color1;
-             c1=parag(color1);
-             document.body.style.backgroundImage =
-                `linear-gradient(to right, ${c1}, ${c2})`;
+const addtodolist=(todoarr)=>{
+    return localStorage.setItem('todoitem',JSON.stringify(todoarr));
+}
 
-            
-            paras.textContent = `background-image: linear-gradient(to right, ${c1}, ${c2});`;
-            
-        }
-         const methodrandom1=()=>{
-            const color2=color();
-            button2.textContent=color2;
-             c2=parag(color2);
-            
-        document.body.style.backgroundImage =
-          `linear-gradient(to right, ${c1}, ${c2})`;
+let todoarr=getodo() || [];
 
-        paras.textContent = `background-image: linear-gradient(to right, ${c1}, ${c2});`;
-            
-        }
+const getdynaminc=(curr)=>{
+    let p=document.createElement("p");
+    p.classList.add("main_div");
+    p.innerHTML=`<li>${curr}</li> <button class="delete">DELTE</button>`;
+    lst.appendChild(p);
+}
 
-        
-        button1.addEventListener("click",methodrandom);
-        button2.addEventListener("click",methodrandom1);
-        paras.addEventListener('click',()=>{
-          navigator.clipboard.writeText(paras.innerText);
-          alert("Text copy to clipboard");
-        });
-        
-        
+
+const addlist=(e)=>{
+      // to prevent the nature of the form
+      e.preventDefault();
+
+    const inarr=insert.value.trim();
+   
+
+    if(inarr!="" && !todoarr.includes(inarr)){
+
+    todoarr=getodo() || [];
+
+    todoarr.push(inarr);
+    todoarr=[...new Set(todoarr)];
+
+    localStorage.setItem('todoitem',JSON.stringify(todoarr));
+   
+    
+  
+  
+   const values=insert.value;
+    let p=document.createElement("p");
+    p.classList.add("main_div");
+    p.innerHTML=`<li>${insert.value}</li> <button class="delete">DELTE</button>`;
+    lst.appendChild(p);
+    
+}
+ insert.value="";
+}
+
+const showlist=()=>{
+
+todoarr.forEach((curr)=>{
+    getdynaminc(curr);
+});
+
+};
+showlist();
+
+const removelement=(e)=>{
+    const del=e.target;
+    let delet=del.previousElementSibling.innerText;
+    let parentele=del.parentElement;
+    
+
+    todoarr=todoarr.filter((curr)=>{
+        return curr!=delet.toLowerCase();
+    })
+
+
+    addtodolist(todoarr);
+    parentele.remove();
+}
+
+lst.addEventListener('click',(e) => {
+e.preventDefault();
+if(e.target.classList.contains("delete")){
+     removelement(e);
+}
+
+});
+
+butn.addEventListener('click', addlist);
