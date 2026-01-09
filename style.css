@@ -1,59 +1,50 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body{
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    position: relative;
-    background-color: rgba(127, 255, 212, 0.307);
-}
-
-/* Heading at top */
-h1{
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 60px;
-}
-
-/* Middle content */
-.All{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
+    background-color: black;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-/* Buttons */
-.btnAll{
-    display: flex;
-    gap: 20px;
-
-}
-
-#btn1, #btn2{
-    width: 150px;
-    height: 40px;
-    border-radius: 20px;
-    border: none;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     
 }
-.copy{
-    background: rgba(165, 19, 19, 0.215);
-    padding: 12px 16px;
-    border-radius: 8px;
+h1{
+    color: #e5ec0c;
+    text-align: center;
+}
+div{
+     margin-top: 50px;
+     display: flex;
+     justify-content: center;
+     height: 30px;
+     
+}
+#input{
+    border-radius: 20px ;
+}
+#btn{
+    margin-left: 12px;
+    background-color: #e5ec0c;
+    border-radius: 20px;
+    width: 100px;
+}
+.list{
     color: white;
-    font-size: 14px;
-    width: 340px;
-    height: 50px;
-    border-left: 5px solid whitesmoke;
+    margin-left: 38%;
+}
+.main_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+    margin-left: 50px;
 }
 
+.delete {
+    background-color:  #e5ec0c;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 70%;
+}
